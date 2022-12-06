@@ -22,7 +22,7 @@ beforeEach(()=>{
     cy.get(Login.lockedOutError).should('have.text',loginData.lockedOutUser.errorMessage)
   })
 
-  it.only('should login with with problem user', ()=>{
+  it('should login with with problem user', ()=>{
     Login.login(loginData.problemUser.username, loginData.problemUser.password)
 
     //code for asserting on multimple images to have the same src
