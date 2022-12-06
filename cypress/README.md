@@ -19,10 +19,10 @@ npx cypress run --browser firefox
 Execute a specific test file
 Without Report
 
-npx cypress run --spec cypress/e2e/test/InClassActivities/activity4.cy.js
+npx cypress run --spec cypress/e2e/test/login.cy.js
 
 OR
 
 With Report
 
-npm run test:spec cypress/e2e/test/InClassActivities/activity4.cy.js
+npm run test:spec cypress/e2e/test/login.cy.js
