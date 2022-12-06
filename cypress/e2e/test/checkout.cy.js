@@ -5,7 +5,6 @@ import Product from '../page/product.page'
 import loginData from '../data/login.data'
 import Login from '../page/login.page'
 import personalData from '../data/checkoutInfo.data'
-import Dinero from '/Users/giselletodd/Desktop/cypress-saucedemo-assignment/node_modules/dinero.js'
 
 
 describe('Checkout Workflow', () => {
@@ -37,9 +36,6 @@ describe('Checkout Workflow', () => {
       cy.get(Cart.summaryInfo).eq(1).should('exist') //asserts that shipping info exists in the DOM
       cy.get(Cart.itemSubtotal).should('include.text','$'+productData.products[0].price)
       
-      //const calculatedTotal = Cart.calTotal(+productData.products[0].price) //round to two decimal places
-      //calculatedTotal.add(Dinero({ amount: 0, currency: 'USD'}))
-      //cy.get(Cart.itemTotal).should('have.text', 'Total: $'+calculatedTotal)
       Cart.completeOrder();
 
       cy.intercept('checkout-complete.html')
@@ -71,6 +67,7 @@ describe('Checkout Workflow', () => {
       cy.get(Cart.cartProductDescrp).eq(0).should('have.text', productData.products[0].description)
       cy.get(Cart.cartProductDescrp).eq(1).should('have.text', productData.products[2].description)
       cy.get(Cart.cartProductDescrp).eq(2).should('have.text', productData.products[3].description)
+      
       //assert on the price of the items
       const pricesAdded = ['$29.99', '$15.99', '$49.99']
       cy.get(Cart.checkoutProdPrice).each(($elem, index) => {
@@ -101,7 +98,7 @@ describe('Checkout Workflow', () => {
       cy.intercept('cart.html')
 
       Cart.checkout()
-      Cart.inputCheckoutInfo('', personalData.personal.lastname, personalData.personal.postalcode)
+      Cart.inputCheckoutInfoNoFN(personalData.personal.lastname, personalData.personal.postalcode)
       cy.get(Cart.errorMessage).should('have.text','Error: First Name is required')
 
     })
@@ -115,7 +112,7 @@ describe('Checkout Workflow', () => {
       cy.intercept('cart.html')
 
       Cart.checkout()
-      Cart.inputCheckoutInfo(personalData.personal.firstname, '', personalData.personal.postalcode)
+      Cart.inputCheckoutInfoNoLN(personalData.personal.firstname, personalData.personal.postalcode)
       cy.get(Cart.errorMessage).should('have.text','Error: Last Name is required')
 
     })

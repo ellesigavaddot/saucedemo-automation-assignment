@@ -22,10 +22,14 @@ beforeEach(()=>{
     cy.get(Login.lockedOutError).should('have.text',loginData.lockedOutUser.errorMessage)
   })
 
-  it('should login with with problem user', ()=>{
+  it.only('should login with with problem user', ()=>{
     Login.login(loginData.problemUser.username, loginData.problemUser.password)
 
     //code for asserting on multimple images to have the same src
+    cy.get(Product.itemImgs).should('have.length.lte', 6)
+    cy.get(Product.itemImgs).each(($elem)=> {
+      expect($elem).to.have.attr('src', '/static/media/sl-404.168b1cce.jpg')
+    })
   }) 
 
   it('should login with performance glitch user', ()=>{
@@ -36,7 +40,7 @@ beforeEach(()=>{
 
   // Negative tests
 
-  it.only('should not login with incorrect password for a valid user', ()=>{
+  it('should not login with incorrect password for a valid user', ()=>{
     Login.login(loginData.valid.username,'WrongPassword!')
 
     cy.get(Login.pwErrorMessage).should('have.text', 'Epic sadface: Username and password do not match any user in this service')

@@ -119,6 +119,18 @@ class CartPage{
         cy.get(this.buttonContinueCheckout).click()
     }
 
+    inputCheckoutInfoNoFN(lastname, zip){
+        cy.get(this.lastname).type(lastname)
+        cy.get(this.postalCode).type(zip)
+        cy.get(this.buttonContinueCheckout).click()
+    }
+
+    inputCheckoutInfoNoLN(firstname, zip){
+        cy.get(this.firstname).type(firstname)
+        cy.get(this.postalCode).type(zip)
+        cy.get(this.buttonContinueCheckout).click()
+    }
+
     paymentInfo(){
         cy.get(this.summaryInfo).first()
     }

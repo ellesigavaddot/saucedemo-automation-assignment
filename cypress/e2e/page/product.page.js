@@ -38,6 +38,10 @@ class ProductPage{
         return ('div.inventory_item_price')
     }
 
+    get itemImgs(){
+        return ('img.inventory_item_img')
+    }
+
     get buttonsAddToCart(){
         return ('//button[text()="Add to cart"]')
     }
